@@ -11,7 +11,7 @@ router.post("/", (req, res) => {
 
 		if (!verifyJwt) return res.status(401).send({ error: "token expired login again" });
 
-		res.status(200).cookie("authToken", authToken, { httpOnly: true, secure: true }).send({ message: "token verified" });
+		res.status(200).cookie("authToken", authToken, { secure: true, httpOnly: true, sameSite:'none' }).send({ message: "token verified" });
 	} catch (err) {
 		console.log(err.message);
 		res.status(409).send({ error: "server error try agian some time" });
